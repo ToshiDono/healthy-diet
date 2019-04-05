@@ -25,6 +25,10 @@ public class Allergy {
             inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"))
     private Set<Product> products;
 
+    public Allergy(String name) {
+        this.name = name;
+    }
+
     public Allergy(String name, Product... products) {
         this.name = name;
         this.products = Stream.of(products).collect(Collectors.toSet());

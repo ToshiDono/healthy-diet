@@ -18,12 +18,20 @@ public class Product {
     @Column(columnDefinition = "text")
     private String description;
 
-    @ManyToMany(mappedBy = "products")
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }, mappedBy = "products")
     private Set<Allergy> allergies = new HashSet<>();
 
     public Product(String name, String description) {
         this.name = name;
         this.description = description;
+    }
+
+    public Product(String name) {
+        this.name = name;
     }
 
     public int getId() {
